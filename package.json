@@ -1,0 +1,8 @@
+{
+  "name": "logat",
+  "version": "1.0.0",
+  "description": "practical logger that extends console.log to target specific lines",
+  "main": "index.js",
+  "author": "siffogh",
+  "license": "MIT"
+}
