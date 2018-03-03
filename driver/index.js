@@ -1,24 +1,12 @@
 const Logger = require('../index');
-
-const logger = new Logger();
+const wisdom = require('./wisdom');
+const { logLineAt } = new Logger();
 
 const demo =  () => {
-  console.log('------Demo------');
-  logger.logLineAt(1, 'firstLine');
-  logger.logLineAt(2, 'secondLine');
-  console.log('------End------');
-  
-  
-  setTimeout(() => {
-    logger.logLineAt(1, 'firstLine modified');
-  }, 2000);
-  
-  setTimeout(() => {
-    logger.logLineAt(2, 'secondLine modified');
-  }, 4000);
-  
+  console.log(wisdom.get());
+  setInterval(() => logLineAt(0, wisdom.get()), 500);
 };
 
 
-demo()
+demo();
 
