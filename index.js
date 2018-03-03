@@ -8,6 +8,7 @@ class Logger {
     this.hackConsole();
 
     this.hackConsole = this.hackConsole.bind(this);
+    this.clear = this.clear.bind(this);
   }
 
   hackConsole() {
