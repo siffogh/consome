@@ -1,12 +1,11 @@
-const chalk = require('chalk');
-const Logger = require('../index');
+require('../index');
 const wisdom = require('./wisdom');
-const { logLineAt, clear } = new Logger();
 
 const demo =  () => {
-  console.log(chalk.white.bold(wisdom.get()));
-  setInterval(() => logLineAt(0, chalk.white.bold(wisdom.get())), 500);
+  console.log(wisdom.get());
+  setInterval(() => {
+    console.logLineAt(0, wisdom.get())
+  }, 500);
 };
-
 
 demo();

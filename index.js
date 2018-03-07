@@ -1,70 +1,89 @@
 const readline = require('readline');
 
+let lines = 0;
 
-class Logger {
-  constructor(options) {
-    /**
-     * Bind member methods
-     */
-    this.proxyConsoleLog = this.proxyConsoleLog.bind(this);
-    this.log = this.log.bind(this);
-    this.logLine = this.logLine.bind(this);
-    this.logLineAt = this.logLineAt.bind(this);
+/**
+ * Proxies console.log
+ */
+const _log = console.log;
+console.log = function (...args){
+  logProxy(args);
+  _log.apply(this, args);
+};
 
-    this.lines = 0;
-    this.proxyConsoleLog();
-  }
+/**
+ * Adds methods to console
+ */
+console.logLineAt = logLineAt;
+console.logLine = logLine;
 
-  // TODO: add proxy for other console methods
-  // TODO: make logLineAt support multiple lines & call it logAt
-  // TODO: make logLine support multiple lines & call it log
-  proxyConsoleLog() {
-    this._log = console.log;
-    console.log = this.log;
-  }
-
-  /**
-   * A proxy for console.log
-   */
-  log(...args) {
-    const result = args.reduce((res, arg) => res += arg, '');
-    this.lines += result.split('\n').length;
-    this._log(...args);
-  }
-
-  /**
-   * Logs a single line
-   * @param line
-   * @returns {number}
-   */
-  logLine(line) {
-    this.logLineAt(this.lines, line);
-    return this.lines - 1;
-  }
-
-  /**
-   * Logs a single line at position index
-   * @param index
-   * @param line
-   */
-  logLineAt(index, line) {
-    let n = this.lines - index;
-    let stdout = process.stdout;
-    readline.cursorTo(stdout, 0);
-    readline.moveCursor(stdout, 0, -n);
-    stdout.write(line);
-    readline.clearLine(stdout, 1);
-    readline.cursorTo(stdout, 0);
-
-    let newMove;
-    if (n > this.lines || n === 0) {
-      this.lines += n + 1;
-      newMove = n + 1;
-    } else {
-      newMove = n;
-    }
-    readline.moveCursor(stdout, 0, newMove);
-  }
+function getLinesCount(args) {
+  const result = args.reduce((res, arg) => res += arg, '');
+  return result.split('\n').length;
 }
 
-module.exports = Logger;
+/**
+ * A proxy for console.log
+ */
+function logProxy(args) {
+  lines += getLinesCount(args);
+}
+
+/**
+ * Logs a single line
+ * @param line
+ * @returns {number}
+ */
+function logLine(line) {
+  logLineAt(lines, line);
+  return lines - 1;
+}
+
+/**
+ * Logs a single line at position index
+ * @param index
+ * @param line
+ */
+function logLineAt(index, line) {
+  let n = lines - index;
+  let stdout = process.stdout;
+  readline.cursorTo(stdout, 0);
+  readline.moveCursor(stdout, 0, -n);
+  stdout.write(line);
+  readline.clearLine(stdout, 1);
+  readline.cursorTo(stdout, 0);
+
+  let newMove;
+  if (n > lines || n === 0) {
+    lines += n + 1;
+    newMove = n + 1;
+  } else {
+    newMove = n;
+  }
+  readline.moveCursor(stdout, 0, newMove);
+}
+
+/**
+ * Logs a text at position index
+ * @param index
+ * @param line
+ */
+function logAt(index, ...args) {
+  const count = getLinesCount(args);
+  let stdout = process.stdout;
+  readline.cursorTo(stdout, 0);
+  let n = lines - index;
+  readline.moveCursor(stdout, 0, -n);
+  stdout.write(line);
+  readline.clearLine(stdout, 1);
+  readline.cursorTo(stdout, 0);
+
+  let newMove;
+  if (n > lines || n === 0) {
+    lines += n + 1;
+    newMove = n + 1;
+  } else {
+    newMove = n;
+  }
+  readline.moveCursor(stdout, 0, newMove);
+}
