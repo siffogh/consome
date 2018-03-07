@@ -4,5 +4,9 @@
   "description": "practical logger that extends console.log to target specific lines",
   "main": "index.js",
   "author": "siffogh",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "^1.11.1"
+  }
 }
