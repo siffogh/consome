@@ -1,5 +1,20 @@
-# Consome
+# Consome = Console + Awesome
 
-<img src="./snippet.png" />
+<img src="./snippet.png" height="500px" />
 
-<img src="./demo.gif" />
+Adds a logAt(index, message) to console.
+
+## Install
+
+```sh
+yarn add -D consome
+```
+
+or
+
+```sh
+npm i -save-dev consome
+```
+
+## Result
+<img src="./demo.gif" height="200px" />
