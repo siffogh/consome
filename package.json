@@ -1,12 +1,8 @@
 {
-  "name": "logat",
+  "name": "consome",
   "version": "1.0.0",
-  "description": "practical logger that extends console.log to target specific lines",
+  "description": "add a console.logAt function to your NodeJS console",
   "main": "index.js",
   "author": "siffogh",
-  "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {
-    "prettier": "^1.11.1"
-  }
+  "license": "MIT"
 }
