@@ -4,7 +4,7 @@ const wisdom = require('./wisdom');
 const demo =  () => {
   console.log(wisdom.get());
   setInterval(() => {
-    console.logLineAt(0, wisdom.get())
+    console.logAt(0, wisdom.get())
   }, 500);
 };
 

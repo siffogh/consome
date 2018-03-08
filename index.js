@@ -12,10 +12,9 @@ console.log = function (...args){
 };
 
 /**
- * Adds methods to console
+ * Adds logAt to console
  */
-console.logLineAt = logLineAt;
-console.logLine = logLine;
+console.logAt = logAt;
 
 function getLinesCount(args) {
   const result = args.reduce((res, arg) => res += arg, '');
@@ -30,60 +29,29 @@ function logProxy(args) {
 }
 
 /**
- * Logs a single line
- * @param line
- * @returns {number}
- */
-function logLine(line) {
-  logLineAt(lines, line);
-  return lines - 1;
-}
-
-/**
- * Logs a single line at position index
- * @param index
- * @param line
- */
-function logLineAt(index, line) {
-  let n = lines - index;
-  let stdout = process.stdout;
-  readline.cursorTo(stdout, 0);
-  readline.moveCursor(stdout, 0, -n);
-  stdout.write(line);
-  readline.clearLine(stdout, 1);
-  readline.cursorTo(stdout, 0);
-
-  let newMove;
-  if (n > lines || n === 0) {
-    lines += n + 1;
-    newMove = n + 1;
-  } else {
-    newMove = n;
-  }
-  readline.moveCursor(stdout, 0, newMove);
-}
-
-/**
  * Logs a text at position index
  * @param index
  * @param line
  */
 function logAt(index, ...args) {
-  const count = getLinesCount(args);
-  let stdout = process.stdout;
-  readline.cursorTo(stdout, 0);
   let n = lines - index;
-  readline.moveCursor(stdout, 0, -n);
-  stdout.write(line);
-  readline.clearLine(stdout, 1);
-  readline.cursorTo(stdout, 0);
+  let stdout = process.stdout;
+  const linesToLog = args.reduce((res, arg) => res += arg, '').split('\n');
 
-  let newMove;
-  if (n > lines || n === 0) {
-    lines += n + 1;
-    newMove = n + 1;
+  readline.cursorTo(stdout, 0); // -> left start line
+  readline.moveCursor(stdout, 0, -n); // -> go up
+  linesToLog.forEach((line, i) => {
+    stdout.write(line);
+    readline.clearLine(stdout, 1);
+    readline.moveCursor(stdout, 0, 1);
+    readline.cursorTo(stdout, 0);
+  });
+
+  const count = linesToLog.length;
+
+  if(n > count) {
+    readline.moveCursor(stdout, 0, n - count);
   } else {
-    newMove = n;
+    lines += (count - n);
   }
-  readline.moveCursor(stdout, 0, newMove);
 }
