@@ -7,8 +7,10 @@ let lines = 0;
  */
 const _log = console.log;
 console.log = function (...args){
+  const idx = lines;
   logProxy(args);
   _log.apply(this, args);
+  return idx;
 };
 
 /**
