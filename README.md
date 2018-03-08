@@ -1,8 +1,8 @@
-# Consome = Console + Awesome
+# Consome = Console + Awesome :raised_hands:
 
 <img src="./snippet.png" height="500px" />
 
-Adds a logAt(index, message) to console.
+Add a logAt(index, message) function to your NodeJS console.
 
 ## Install
 
