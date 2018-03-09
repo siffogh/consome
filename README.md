@@ -34,6 +34,6 @@ setInterval(() => {
 }, 500);
 
 console.log('----- Fin -----');
-
 ```
+### Result
 <img src="./demo.gif" height="200px" />
