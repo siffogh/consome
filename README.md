@@ -37,3 +37,7 @@ console.log('----- Fin -----');
 ```
 ### Result
 <img src="./demo.gif" height="200px" />
+
+
+## License
+Unless otherwise specified this project is licensed under [Apache License Version 2.0](./LICENSE).
