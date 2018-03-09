@@ -1,8 +1,13 @@
 {
   "name": "consome",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "add a console.logAt function to your NodeJS console",
   "main": "index.js",
   "author": "siffogh",
-  "license": "MIT"
+  "license": "Apache License Version 2.0",
+  "dependencies": {},
+  "devDependencies": {
+    "consome": "^1.0.0"
+  },
+  "repository": "https://github.com/siffogh/consome"
 }

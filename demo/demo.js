@@ -1,4 +1,4 @@
-require('../index');
+require('consome');
 
 function Loader() {
   const spinner =   '...';
